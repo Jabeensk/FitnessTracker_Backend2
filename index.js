@@ -27,7 +27,7 @@ app.use('/api/workouts', workoutsRoutes);
 app.use('/api/food-diary', foodDiaryRoutes); 
 
 app.get('/', (req, res) => {
-    res.send('Welcome to the API');
+    res.send('Welcome My Burn buddy');
 });
 
 app.listen(PORT, () => {
