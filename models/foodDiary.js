@@ -12,7 +12,7 @@ const foodDiaryEntrySchema = new mongoose.Schema({
   },
   waterIntake: {
     type: Number,
-    default: 0
+    default: ''
   },
   breakfast: {
     type: String,
