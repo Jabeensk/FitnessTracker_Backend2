@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
  */
 router.get("/:id", async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await Users.findById(req.params.id);
     if (!user) return res.status(404).json({ msg: "Resource not found!" });
     else res.json(user);
   } catch (error) {
@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     // Create a new user
-    const newUser = new User({
+    const newUser = new Users({
       firstName,
       lastName,
       username,
@@ -70,7 +70,7 @@ router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { body } = req;
-    const updatedUser = await User.findByIdAndUpdate(id, body, { new: true });
+    const updatedUser = await Users.findByIdAndUpdate(id, body, { new: true });
     res.json(updatedUser);
   } catch (error) {
     console.error('Error updating user:', error);
@@ -85,7 +85,7 @@ router.put("/:id", async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedUser = await User.findByIdAndDelete(id);
+    const deletedUser = await Users.findByIdAndDelete(id);
     res.json({ msg: "User deleted", deletedUser });
   } catch (error) {
     console.error('Error deleting user:', error);
@@ -99,7 +99,7 @@ router.post('/signin', async (req, res) => {
   const {email, password} = req.body;
 console.log(password);
   // find user with the provided email
-  const user = await User.findOne({email});
+  const user = await Users.findOne({email});
 console.log(user);
   if (!user) {
     return res.status(401).json({msg: "Invalid Credentials"});
