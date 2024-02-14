@@ -6,7 +6,15 @@ const router = express.Router();
 // Create a food diary entry
 router.post('/', async (req, res) => {
   try {
-    const newEntry = await FoodDiaryEntry.create(req.body);
+    const { userId, waterIntake, breakfast, lunch, dinner, snacks } = req.body;
+    const newEntry = await FoodDiaryEntry.create(req.body) ({
+    userId,
+    waterIntake,
+    breakfast,
+    lunch,
+    dinner,
+    snacks
+  });
     res.status(201).json(newEntry);
   } catch (error) {
     res.status(500).json({ message: error.message });
